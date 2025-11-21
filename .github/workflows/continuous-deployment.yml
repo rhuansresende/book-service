@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "master"
+      - "feature/feat-rest-book"
   pull_request:
     branches:
       - "master"
@@ -27,11 +28,11 @@ jobs:
         cache: maven
 
     - name: Build Application .jar
-      working-directory: ./book-service
-      run: mvn clean package
+      working-directory: .
+      run: mvn -f book-service/pom.xml clean package
 
     - name: Docker Compose Build
-      working-directory: ./
+      working-directory: .
       run: docker compose build
 
     - name: Push to Docker Hub Container Registry
