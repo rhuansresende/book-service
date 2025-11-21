@@ -13,8 +13,6 @@ services:
       - "5432"
     networks:
       - book-network
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER}" ]
       interval: 10s
@@ -25,7 +23,9 @@ services:
   backend:
     image: rrsolucoesti/book-service
     container_name: book-service
-    build: ./book-service
+    build:
+      context: .
+      dockerfile: Dockerfile
     restart: unless-stopped
     environment:
       TZ: America/Sao_Paulo
