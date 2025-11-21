@@ -1,3 +1,8 @@
+security:
+  jwt:
+    token:
+      secret-key: 53cr37
+      expire-length: 3600000
 server:
   port: 8000
 spring:
@@ -18,3 +23,7 @@ spring:
         jdbc:
           time_zone: America/Sao_Paulo
     show-sql: true
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
