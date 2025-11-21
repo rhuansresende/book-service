@@ -1,7 +1,7 @@
 package br.com.desenvolvimento.logica.book_service.model;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
