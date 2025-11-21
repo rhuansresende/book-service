@@ -28,8 +28,7 @@ jobs:
         cache: maven
 
     - name: Build Application .jar
-      working-directory: .
-      run: mvn -f book-service/pom.xml clean package
+      run: mvn clean package
 
     - name: Docker Compose Build
       working-directory: .
