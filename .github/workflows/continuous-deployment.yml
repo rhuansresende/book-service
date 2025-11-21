@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - "master"
-      - "feature/feat-rest-book"
   pull_request:
     branches:
       - "master"
