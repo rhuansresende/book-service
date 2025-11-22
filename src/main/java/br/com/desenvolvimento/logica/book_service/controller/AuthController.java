@@ -24,7 +24,7 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<?> signIn(@RequestBody AccountCredentialsDTO credentials) {
         if (credentials == null
-                || StringUtils.isBlank(credentials.getUsername())
+                || StringUtils.isBlank(credentials.getDocument())
                 || StringUtils.isBlank(credentials.getPassword())) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request!");
         }
@@ -47,9 +47,12 @@ public class AuthController {
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> createUser(@RequestBody AccountCredentialsDTO credentials) {
 
-        if (StringUtils.isEmpty(credentials.getUsername())
+        if (StringUtils.isEmpty(credentials.getFullname())
+                || StringUtils.isEmpty(credentials.getEmail())
+                || StringUtils.isEmpty(credentials.getDocument())
                 || StringUtils.isEmpty(credentials.getPassword())
-                || StringUtils.isEmpty(credentials.getFullname())) {
+                || credentials.getRoles() == null
+                || credentials.getRoles().isEmpty()) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request!");
         }
 

@@ -8,14 +8,14 @@ CREATE TABLE IF NOT EXISTS public.users
     account_non_locked boolean,
     credentials_non_expired boolean,
     enabled boolean,
-    full_name character varying(255) COLLATE pg_catalog."default",
-    password character varying(255) COLLATE pg_catalog."default",
-    user_name character varying(255) COLLATE pg_catalog."default",
+    person_id bigint NOT NULL,
+    password character varying(255),
+    user_name character varying(255),
     CONSTRAINT users_pkey PRIMARY KEY (id),
-    CONSTRAINT ukk8d0f2n7n88w1a16yhua64onx UNIQUE (user_name)
+    CONSTRAINT ukk8d0f2n7n88w1a16yhua64onx UNIQUE (user_name),
+    CONSTRAINT fk_usuario_person FOREIGN KEY (person_id) REFERENCES person(id)
     )
-
     TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS public.users
-    OWNER to postgres;
+    OWNER TO postgres;
