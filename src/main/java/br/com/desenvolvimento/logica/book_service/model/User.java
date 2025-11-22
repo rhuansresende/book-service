@@ -2,6 +2,9 @@ package br.com.desenvolvimento.logica.book_service.model;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
+import org.hibernate.envers.RelationTargetAuditMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,6 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Audited
 @Table(name = "users")
 public class User implements UserDetails, Serializable {
 
@@ -21,9 +25,6 @@ public class User implements UserDetails, Serializable {
 
     @Column(name = "user_name", unique = true)
     private String username;
-
-    @Column(name = "full_name")
-    private String fullName;
 
     @Column
     private String password;
@@ -40,11 +41,15 @@ public class User implements UserDetails, Serializable {
     @Column
     private Boolean enabled;
 
+    @NotAudited
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_permission",
             joinColumns = {@JoinColumn(name = "id_user")},
             inverseJoinColumns = {@JoinColumn(name = "id_permission")})
     private List<Permission> permissions;
+
+    @ManyToOne
+    private Person person;
 
     public User() {}
 
@@ -103,14 +108,6 @@ public class User implements UserDetails, Serializable {
         this.username = username;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -155,15 +152,23 @@ public class User implements UserDetails, Serializable {
         this.permissions = permissions;
     }
 
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(fullName, user.fullName) && Objects.equals(password, user.password) && Objects.equals(accountNonExpired, user.accountNonExpired) && Objects.equals(accountNonLocked, user.accountNonLocked) && Objects.equals(credentialsNonExpired, user.credentialsNonExpired) && Objects.equals(enabled, user.enabled) && Objects.equals(permissions, user.permissions);
+        return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(accountNonExpired, user.accountNonExpired) && Objects.equals(accountNonLocked, user.accountNonLocked) && Objects.equals(credentialsNonExpired, user.credentialsNonExpired) && Objects.equals(enabled, user.enabled) && Objects.equals(permissions, user.permissions) && Objects.equals(person, user.person);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, fullName, password, accountNonExpired, accountNonLocked, credentialsNonExpired, enabled, permissions);
+        return Objects.hash(id, username, password, accountNonExpired, accountNonLocked, credentialsNonExpired, enabled, permissions, person);
     }
 }

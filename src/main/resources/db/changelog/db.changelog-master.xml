@@ -7,10 +7,14 @@
        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.15.xsd">
 
     <include file="db/changelog/v1-create-extension-unaccent.sql"/>
-    <include file="db/changelog/v2-create-table-book.sql"/>
-    <include file="db/changelog/v3-create-table-permission.sql"/>
-    <include file="db/changelog/v4-create-table-users.sql"/>
-    <include file="db/changelog/v5-create-table-user-permission.sql"/>
-    <include file="db/changelog/v6-insert-user-master.sql"/>
+    <include file="db/changelog/v2-create-table-custom-revision.sql"/>
+    <include file="db/changelog/v3-create-table-book.sql"/>
+    <include file="db/changelog/v4-create-table-permission.sql"/>
+    <include file="db/changelog/v5-create-table-person.sql"/>
+    <include file="db/changelog/v6-create-table-person-audit.sql"/>
+    <include file="db/changelog/v7-create-table-users.sql"/>
+    <include file="db/changelog/v8-create-table-users-audit.sql"/>
+    <include file="/db/changelog/v9-create-table-user-permission.sql"/>
+    <include file="db/changelog/v10-insert-user-master.sql"/>
 
 </databaseChangeLog>
