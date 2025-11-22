@@ -4,7 +4,7 @@ security:
       secret-key: 53cr37
       expire-length: 3600000
 server:
-  port: 8000
+  port: 80
 spring:
   application:
     name: book-service
@@ -13,9 +13,9 @@ spring:
     change-log: classpath:/db/changelog/db.changelog-master.xml
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/bookdb
+    url: jdbc:postgresql://book-db-server.cd42i02k8vet.sa-east-1.rds.amazonaws.com:5432/bookdb
     username: postgres
-    password: aA@741859
+    password: admin123
   jpa:
     hibernate:
       ddl-auto: none
